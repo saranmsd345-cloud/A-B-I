@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ABI 🎀</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #f8f0e8;
+  color: #684c49;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #b18b83;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 9vw, 43px);
+  font-weight: 500;
+  color: #795450;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #a2877e;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+
+.envelope-wrap {
+  perspective: 1000px;
+  margin: 20px auto 26px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.envelope {
+  position: relative;
+  height: 205px;
+  background: #e8cfc6;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 15px 35px #b8998b35;
+  transition: transform 0.3s;
+}
+
+.envelope:hover {
+  transform: translateY(-4px);
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f0ded5;
+  clip-path: polygon(0 0, 50% 58%, 100% 0);
+  z-index: 3;
+  transition: transform 0.7s;
+  transform-origin: top;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #dfbfb6;
+  clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+  z-index: 2;
+}
+
+.seal {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  font-size: 32px;
+  transition: opacity 0.3s;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.letter {
+  position: absolute;
+  left: 7%;
+  width: 86%;
+  height: 175px;
+  top: 12px;
+  background: #fffaf3;
+  padding: 22px 12px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  color: #8a5f5a;
+  transition: transform 0.9s ease;
+  z-index: 1;
+}
+
+.envelope.open .letter {
+  transform: translateY(-100px);
+  z-index: 5;
+}
+
+.tap {
+  color: #a88b81;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.letter-page {
+  display: none;
+  text-align: left;
+  background: #fffaf3;
+  padding: 30px 23px;
+  border: 1px solid #eadbd0;
+  box-shadow: 0 12px 35px #b8998b20;
+  margin-top: 30px;
+  animation: fadeUp 1s ease;
+}
+
+.letter-page.show {
+  display: block;
+}
+
+.letter-page h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 31px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #9b6d69;
+}
+
+.message {
+  font-size: 13px;
+  line-height: 2.1;
+  font-weight: 300;
+  white-space: pre-line;
+  min-height: 150px;
+}
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  color: #a67570;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.last-wish {
+  display: none;
+  margin-top: 25px;
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+
+.last-wish.show {
+  display: block;
+}
+
+.last-wish p {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  line-height: 1.8;
+}
+
+.last-wish span {
+  display: block;
+  font-size: 27px;
+  margin-top: 12px;
+}
+
+button {
+  border: 1px solid #cda69d;
+  background: transparent;
+  color: #89645e;
+  padding: 12px 23px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background: #ead6ce;
+}
+
+.footer {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #b39a8f;
+  margin-top: 32px;
+}
+
+.petal {
+  position: fixed;
+  top: -30px;
+  z-index: 1;
+  pointer-events: none;
+  animation: fall linear forwards;
+  opacity: 0.7;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 380px) {
+  .letter-page {
+    padding: 25px 18px;
+  }
+  .message {
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+  <div class="eyebrow">A LITTLE SOMETHING FOR</div>
+
+  <h1>Happy Birthday ABI 🎀</h1>
+
+  <p class="subtitle">
+    Some feelings are difficult to explain...<br>
+    So I wrote you a little letter. 💌
+  </p>
+
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope" id="envelope" onclick="openLetter()">
+      <div class="letter">Dear ABI,<br><br>A little note for you ✨</div>
+      <div class="seal">💌</div>
+    </div>
+  </div>
+
+  <p class="tap" id="tapText">TAP THE ENVELOPE TO OPEN</p>
+
+  <section class="letter-page" id="letterPage">
+    <h2>Dear ABI,</h2>
+
+    <div class="message" id="message"></div>
+
+    <div class="signature" id="signature" style="display:none">
+      Stay happy, always. 💛
+    </div>
+  </section>
+
+  <section class="last-wish" id="lastWish">
+    <p>
+      I hope this new year of your life<br>
+      brings you beautiful little moments.
+    </p>
+    <span>🌷 ✨ 🎂</span>
+    <button onclick="celebrate()">MAKE A WISH ✨</button>
+  </section>
+
+  <div class="footer">MADE WITH WARM WISHES · ABI</div>
+
+</main>
+
+<script>
+const birthdayMessage = `Honestly, I don't really know how to describe the way I feel about you. It's not something I can simply put into words like love or friendship, but I know that I genuinely like you as a person. I have a lot of respect for you, and there's something about you that makes you special to me, even though we haven't really talked much in person.
+
+Stay happy, take care and keep smiling always. Have a beautiful birthday. 💛`;
+
+let opened = false;
+
+function openLetter() {
+  if (opened) return;
+  opened = true;
+
+  document.getElementById('envelope').classList.add('open');
+  document.getElementById('tapText').style.display = 'none';
+
+  setTimeout(() => {
+    document.getElementById('envelopeWrap').style.display = 'none';
+
+    const page = document.getElementById('letterPage');
+    page.classList.add('show');
+
+    typeMessage();
+  }, 1000);
+}
+
+function typeMessage() {
+  const target = document.getElementById('message');
+  let index = 0;
+
+  function type() {
+    if (index < birthdayMessage.length) {
+      target.textContent += birthdayMessage.charAt(index);
+      index++;
+
+      // Preserve line breaks and keep the latest text visible.
+      target.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      setTimeout(type, 24);
+    } else {
+      document.getElementById('signature').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('lastWish').classList.add('show');
+        createPetals();
+      }, 700);
+    }
+  }
+
+  type();
+}
+
+function createPetals() {
+  const symbols = ['♡', '✿', '✨', '🌸'];
+
+  for (let i = 0; i < 22; i++) {
+    setTimeout(() => {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.textContent = symbols[
+        Math.floor(Math.random() * symbols.length)
+      ];
+
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.fontSize = (12 + Math.random() * 15) + 'px';
+      petal.style.animationDuration = (5 + Math.random() * 5) + 's';
+
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 11000);
+    }, i * 180);
+  }
+}
+
+function celebrate() {
+  createPetals();
+
+  const wish = document.querySelector('.last-wish p');
+  wish.textContent = 'May your smile always find a reason to shine. 💛';
+
+  document.querySelector('.last-wish button').textContent =
+    'HAPPY BIRTHDAY ABI 🎀';
+}
+</script>
+
+</body>
+</html>
